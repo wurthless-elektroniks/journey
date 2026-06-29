@@ -315,3 +315,7 @@ Then, on top of this:
 But the best strategy is to throw the game in the garbage and play something else.
 There really isn't that much depth to it than what I just described, and it somehow succeeds in
 having even less depth than the game it's trying to clone.
+
+## Bonus patch
+
+See mammoth.py
