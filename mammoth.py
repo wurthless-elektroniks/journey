@@ -49,24 +49,25 @@ def patch(exe, original, replaced):
         raise RuntimeError("patch failed?")
     return exe
 
-
 with open("private/JOURNEY.EXE", "rb") as f:
     exe = f.read()
 
-for pattern in [ CALLF_PTERODACTYLS_MINIGAME, CALLF_ROCKFALL_MINIGAME, CALLF_CROCS_MINIGAME ]:
-    exe = patch(exe, pattern, CALLF_MAMMOTH_MINIGAME)
-    
-# NOP these out
-for pattern in [ ALARMCLOCK_TICK ]:
-    exe = patch(exe, pattern, bytes([0x90] * len(pattern)))
-    
-exe = patch(exe, RANDOM_INJURY_PATTERN, RANDOM_INJURY_STARTS_ROCKFALL_INSTEAD)
+# if True to mammoth everything
+if True:
+    for pattern in [ CALLF_PTERODACTYLS_MINIGAME, CALLF_ROCKFALL_MINIGAME, CALLF_CROCS_MINIGAME ]:
+        exe = patch(exe, pattern, CALLF_MAMMOTH_MINIGAME)
+        
+    # NOP these out
+    for pattern in [ ALARMCLOCK_TICK ]:
+        exe = patch(exe, pattern, bytes([0x90] * len(pattern)))
+        
+    exe = patch(exe, RANDOM_INJURY_PATTERN, RANDOM_INJURY_STARTS_ROCKFALL_INSTEAD)
 
-# if True to cheat. should at least allow you to get through to the end
+# if True for infinite health
 if False:
-    PLAYER_DEAD_PATTERN = bytes([0x83, 0x3e, 0x8c, 0x69, 0x00, 0x7f, 0x03])
-    PATCHED             = bytes([0x83, 0x3e, 0x8c, 0x69, 0x00, 0xeb, 0x03])
-    exe = exe.replace(PLAYER_DEAD_PATTERN, PATCHED)
+    UPDATE_PLAYER_HEALTH         = bytes([0xa3, 0x8c, 0x69]) # mov [0x698c], ax
+    UPDATE_PLAYER_HEALTH_PATCHED = bytes([0x90, 0x90, 0x90]) # three nops
+    exe = exe.replace(UPDATE_PLAYER_HEALTH, UPDATE_PLAYER_HEALTH_PATCHED)
 
 with open("private/MAMMOTH.EXE", "wb") as f:
     f.write(exe)
