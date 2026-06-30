@@ -66,9 +66,15 @@ those items, it will take that out of your health instead.
 
 ## Randomness
 
+Randomness is based off the system date and time (shocker!) and advanced by different events.
+
 Important functions:
 - 1000:021d generates the random number.
+- 1ff6:0000 sets the RNG seed.
 - 1ff6:0011 advances the random number generator and returns the result of the last roll.
+- 1fa3:000f reads the system date (INT 21h with AH=0x2A).
+- 1fa3:0025 reads the system time (INT 21h with AH=0x2C).
+- 2019:0042 demunges the system date/time into something that can be used to seed the RNG.
 
 Randomness is affected by the following events (among others):
 - Drawing a textbox (it picks a random color for most of them)
@@ -83,6 +89,15 @@ Randomness is affected by the following events (among others):
 - Difficulty level selection when starting the rockfall minigame (excluding the rockfall minigame
   at the start of each game)
 - Crocodiles appearing in the crocodile minigame
+
+The RNG is re-seeded when:
+- Moving in a direction on foot or on the raft
+- Starting the rockfall minigame
+- Starting the mammoth minigame
+- Starting the water collection minigame
+- Displaying one of the travel messages
+- Entering the main game loop after the first rockfall minigame has been played
+- Starting the crocodile minigame
 
 Random events are:
 - When you enter a danger cell, the game gives you a 70% chance of playing the minigame. This is true for
@@ -171,7 +186,7 @@ Values are as follows:
 - `1` is a dead end marked by an "enormous granite boulder". The game cancels movement into this cell, but will still roll random damage events.
 - `2` is a lava flow that prevents further progress. The game cancels movement into this cell, but will still roll random damage events.
 - `3` is a passageway filled with gas that prevents further progress. The game cancels movement into this cell, but will still roll random damage events.
-- `4` is the underground ocean. The game will switch to the lake map and place you on that map at coordinates x=??,y=?? (0x35, 0x46)
+- `4` is the underground ocean. The game will switch to the lake map and place you on that map at coordinates x=53, y=70 (0x35, 0x46)
 - `5` will randomly throw you into a pterodactyl attack. If the game decides not to, it will roll a random
   damage event.
 - `6` behaves identically to `0` but is not used on the map.
@@ -274,6 +289,9 @@ Here is the raw map data (dumped to lakemap.txt):
 1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
 ```
 
+For the lake's coordinate system, the map is the same size as the main map, but the coordinates are doubled
+in scale.
+
 The lake uses a slightly different table of values:
 
 - `1` is an impassable cell. The game will cancel all movement into one of these cells.
@@ -291,6 +309,17 @@ And here is the graphic map:
 You start at the green point at left. Travelling through light red areas randomly rolls the crocodile minigame,
 dark red areas will always roll a storm. Travel to the blue area to refill water, travel to pink to continue on
 the main map.
+
+## The water collection minigame
+
+Also called "the most useless minigame in the history of minigames".
+
+The goal is to collect water droplets while avoiding hot lava droplets. Both should add or subtract
+33 units of water, but these are weighted so that a water drop credits you 1x33=33 water units, and collecting
+lava penalizes you 8x33=264 water units. And, given that you have a maximum of 1000 units of water, collecting
+just one lava drop will wipe out a quarter of your water.
+
+To make the minigame way more fair, change `c6 46 b3 08` to `c6 46 b3 01`.
 
 ## Overall strategy
 
