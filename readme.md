@@ -345,6 +345,32 @@ But the best strategy is to throw the game in the garbage and play something els
 There really isn't that much depth to it than what I just described, and it somehow succeeds in
 having even less depth than the game it's trying to clone.
 
+## Resource files
+
+### Sounds
+
+2 bytes big endian filesize, followed by sound as 1-bit PCM, read LSB to MSB. See snddec.py.
+
+| Soundfile | The sound
+|-----------|---------------------------------------------------------
+| J.x       | CHIP screen music snippets
+| S.1       | Rock fall impact
+| S.2       | "Heuuugh!" big damage
+| S.3       | "Agh!" small damage
+| S.4       | Loud roar after first rockfall minigame
+| S.5       | Water drop collected
+| S.6       | Lava drop hissing
+| S.7       | Mammoth trumpeting
+| S.8       | Pterodactyl hit
+| S.9       | Falling to death
+| S.10      | Crocodile snapping
+| S.11      | Footsteps when moving on main map
+| S.12      | Alarm clock ticking
+| S.13      | Alarm clock ringing
+| S.14      | Snore inhale
+| S.15      | Snore exhale
+| S.16      | ???
+
 ## Bonus patch
 
 See mammoth.py
