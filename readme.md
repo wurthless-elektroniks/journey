@@ -89,6 +89,7 @@ Randomness is affected by the following events (among others):
 - Difficulty level selection when starting the rockfall minigame (excluding the rockfall minigame
   at the start of each game)
 - Crocodiles appearing in the crocodile minigame
+- The shield rocking back and forth during the lava escape minigame
 
 The RNG is re-seeded when:
 - Moving in a direction on foot or on the raft
@@ -98,6 +99,7 @@ The RNG is re-seeded when:
 - Displaying one of the travel messages
 - Entering the main game loop after the first rockfall minigame has been played
 - Starting the crocodile minigame
+- Starting the lava escape minigame
 
 Random events are:
 - When you enter a danger cell, the game gives you a 70% chance of playing the minigame. This is true for
@@ -346,6 +348,43 @@ There really isn't that much depth to it than what I just described, and it some
 having even less depth than the game it's trying to clone.
 
 ## Resource files
+
+### Spritesheets
+
+Basically Amiga-style graphics data with headers. Sprite graphics are five bitplanes.
+Not sure if I want to document this yet.
+
+### Background pictures
+
+All are Deluxe Paint ILBM format.
+
+| File      | The picture
+|-----------|---------------------------------------------------------
+| P1.AM     | Ruins minigame background
+| P2.AM     | Mammoth minigame background
+| P3.AM     | Ruins fullscreen picture
+| P4.AM     | Rockfall/pterodactyl minigame background
+| P5.AM     | Character select
+| P6.PC1    | Bone graveyard
+| P7.PC1    | Crocodile minigame background
+| P8.PC1    | Main map screen
+| P9.PC1    | Volcano erupting (endscreen)
+| P10.PC1   | Mushroom forest
+| P11.PC1   | Geyser island
+| P12.PC1   | Mammoth
+| P13.PC1   | Crocodile attack
+| P14.PC1   | Pile o' bones (game over screen)
+| P15.PC1   | Old parchment seen in intro
+| P16.PC1   | Hiking in cave, seen in intro
+| P17.PC1   | Shores of the lake
+| P18.PC1   | Snaeffels mountain exterior, seen in intro
+| P19.PC1   | Medical screen
+| P20.PC1   | Caught in a storm
+| P21.PC1   | Stupid useless geology screen
+| P22.PC1   | Water collection minigame background
+| P23.PC1   | CHIP logo
+| P24.PC1   | Titlescreen
+| P25.PC1   | Falling to your death
 
 ### Sounds
 
