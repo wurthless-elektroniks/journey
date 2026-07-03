@@ -89,7 +89,6 @@ Randomness is affected by the following events (among others):
 - Difficulty level selection when starting the rockfall minigame (excluding the rockfall minigame
   at the start of each game)
 - Crocodiles appearing in the crocodile minigame
-- The shield rocking back and forth during the lava escape minigame
 
 The RNG is re-seeded when:
 - Moving in a direction on foot or on the raft
@@ -349,12 +348,28 @@ having even less depth than the game it's trying to clone.
 
 ## Resource files
 
-### Spritesheets
+### Spritesheets (.MAT files)
 
-Basically Amiga-style graphics data with headers. Sprite graphics are five bitplanes.
-Not sure if I want to document this yet.
+Amiga-style bitplanes with headers. All 2-byte fields big endian.
 
-### Background pictures
+2 bytes at start of file indicates number of sprites in file, then, for each sprite:
+- 2 bytes x pixels
+- 2 bytes y pixels
+- 2 bytes always zero
+- nn bytes bitplane A (i << 0)
+- nn bytes bitplane B (i << 1)
+- nn bytes bitplane C (i << 2)
+- nn bytes bitplane D (i << 3)
+- nn bytes bitplane E (alpha mask)
+
+The palette used here is the 16 color default EGA palette.
+
+The game also supports CGA and what looks like an unfinished Hercules graphics mode (it crashes
+after the title screen). In that mode, only three of the bitplanes are used.
+
+See spritedec.py for how to decode them.
+
+### Background pictures (.AM and .PC1 files)
 
 All are Deluxe Paint ILBM format.
 
