@@ -313,6 +313,8 @@ the main map.
 
 ## The water collection minigame
 
+![](sprites/EAU.MAT.11.bmp.png)
+
 Also called "the most useless minigame in the history of minigames".
 
 The goal is to collect water droplets while avoiding hot lava droplets. Both should add or subtract
@@ -350,7 +352,7 @@ having even less depth than the game it's trying to clone.
 
 ### Spritesheets (.MAT files)
 
-Amiga-style bitplanes with headers. All 2-byte fields big endian.
+All .MAT files except for CHARSET1.MAT contain sprite data as 5bpp bitplanes plus headers. All 2-byte fields big endian.
 
 2 bytes at start of file indicates number of sprites in file, then, for each sprite:
 - 2 bytes x pixels
@@ -426,5 +428,7 @@ All are Deluxe Paint ILBM format.
 | S.16      | ???
 
 ## Bonus patch
+
+![](sprites/MAMMOUTH.MAT.15.bmp.png)
 
 See mammoth.py
