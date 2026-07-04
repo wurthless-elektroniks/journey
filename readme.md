@@ -407,25 +407,30 @@ All are Deluxe Paint ILBM format.
 
 2 bytes big endian filesize, followed by sound as 1-bit PCM, read LSB to MSB. See snddec.py.
 
-| Soundfile | The sound
-|-----------|---------------------------------------------------------
-| J.x       | CHIP screen music snippets
-| S.1       | Rock fall impact
-| S.2       | "Heuuugh!" big damage
-| S.3       | "Agh!" small damage
-| S.4       | Loud roar after first rockfall minigame
-| S.5       | Water drop collected
-| S.6       | Lava drop hissing
-| S.7       | Mammoth trumpeting
-| S.8       | Pterodactyl hit
-| S.9       | Falling to death
-| S.10      | Crocodile snapping
-| S.11      | Footsteps when moving on main map
-| S.12      | Alarm clock ticking
-| S.13      | Alarm clock ringing
-| S.14      | Snore inhale
-| S.15      | Snore exhale
-| S.16      | ???
+The PC speaker routine shoves bits to the speaker as fast as it possibly can. A divider value
+is also passed to slow down playback, because soundeffects are stored at a lower sample rate.
+
+Sounds in [sounds/](sounds/) are resampled to try to match how they sound in the Amiga version.
+
+| Soundfile | Divider       | The sound
+|-----------|---------------|-----------------------------------------
+| J.x       | 1             | CHIP screen music snippets
+| S.1       | 7, 14         | Rock fall impact
+| S.2       | 14            | "Heuuugh!" big damage
+| S.3       | 14            | "Agh!" small damage
+| S.4       | 20            | Loud roar after first rockfall minigame (heavily distorted "Professor! Professor Lindenbrock!")
+| S.5       | 14            | Water drop collected
+| S.6       | 14            | Lava drop hissing
+| S.7       | 35            | Mammoth trumpeting
+| S.8       | 20, 30        | Pterodactyl hit
+| S.9       | 35            | Falling to death
+| S.10      | 20, 35        | Crocodile snapping
+| S.11      | 14            | Footsteps when moving on main map
+| S.12      | 14            | Alarm clock ticking
+| S.13      | 14            | Alarm clock ringing
+| S.14      | 14            | Snore inhale
+| S.15      | 14            | Snore exhale
+| S.16      |               | ???
 
 ## Bonus patch
 
